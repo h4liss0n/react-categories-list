@@ -20,7 +20,7 @@ const getCategorie = async () => {
     },
     [""]
   );
-  return res;
+  return res.sort();
 };
 
 export const AppService = {
