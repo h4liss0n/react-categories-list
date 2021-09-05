@@ -7,6 +7,7 @@ type Props = {
 
 export const usePagination = <T extends unknown>({ onFetch }: Props) => {
   const [pageSize, setPageSize] = useState(3);
+  const [activePage, setActivePage] = useState(0);
   const [rows, setRows] = useState<T[]>([]);
   const [data, setData] = useState<[T[]]>([[]]);
 
@@ -48,6 +49,7 @@ export const usePagination = <T extends unknown>({ onFetch }: Props) => {
   const handleSelectPage = useCallback(
     (index: number) => {
       handleInitialPage(index, data);
+      setActivePage(index);
     },
     [data, handleInitialPage]
   );
@@ -62,6 +64,7 @@ export const usePagination = <T extends unknown>({ onFetch }: Props) => {
         {children}
         <footer>
           <Pagination
+            activePage={activePage}
             pageLength={data.length}
             onSelectPage={handleSelectPage}
             onSelectPageSize={handleSelectPageSize}

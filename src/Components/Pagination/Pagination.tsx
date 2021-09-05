@@ -3,6 +3,7 @@ import { List, Item, Link } from "./styled";
 
 type Props = {
   pageLength: number;
+  activePage: number;
   onSelectPage: (index: number) => void;
   onSelectPageSize: (size: number) => void;
 };
@@ -12,7 +13,7 @@ interface IPages {
   index: number;
 }
 
-export const Pagination = ({ pageLength, onSelectPage }: Props) => {
+export const Pagination = ({ pageLength, onSelectPage, activePage }: Props) => {
   const [pages, setPages] = useState<IPages[]>([]);
 
   useEffect(() => {
@@ -34,13 +35,18 @@ export const Pagination = ({ pageLength, onSelectPage }: Props) => {
       </Item>
 
       {pages.map((item) => (
-        <Item>
-          <Link onClick={() => onSelectPage(item.index)}>{item.label}</Link>
+        <Item key={item.index}>
+          <Link
+            active={activePage === item.index}
+            onClick={() => onSelectPage(item.index)}
+          >
+            {item.label}
+          </Link>
         </Item>
       ))}
 
       <Item>
-        <Link onClick={() => onSelectPage(pages[pages.length-1].index)}>
+        <Link onClick={() => onSelectPage(pages[pages.length - 1].index)}>
           &gt;
         </Link>
       </Item>

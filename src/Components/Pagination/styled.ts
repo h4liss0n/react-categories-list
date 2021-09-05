@@ -12,11 +12,16 @@ export const List = styled.ul`
 export const Item = styled.li`
   margin-right: 0.25rem;
 `;
-export const Link = styled.a`
+
+type PropsLink = {
+  active?: boolean;
+};
+export const Link = styled.a<PropsLink>`
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: ${(props) => props.theme.colors.grayDark};
   padding: 0.375rem 0.4375rem;
   text-decoration: none;
-  background: ${(props) => props.theme.colors.gray};
+  background: ${(props) =>
+    props.active ? props.theme.colors.teal : props.theme.colors.gray};
 `;

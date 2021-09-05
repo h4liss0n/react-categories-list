@@ -1,14 +1,16 @@
-import React from 'react';
-import { Nav } from './Components/Nav/Nav';
-import { AppList } from './Page/AppList/AppList';
-import {Container} from './styled'
+import React from "react";
+import { Nav } from "./Components/Nav/Nav";
+import { AppList } from "./Page/AppList/AppList";
+import { AppListContextProvider } from "./Page/AppList/AppListContext";
+import { Container } from "./styled";
 
 function App() {
   return (
     <Container>
-      <Nav/>
-      <AppList/>
-      
+      <AppListContextProvider>
+        <Nav />
+        <AppList />
+      </AppListContextProvider>
     </Container>
   );
 }

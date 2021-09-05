@@ -3,7 +3,7 @@ export interface ISubscription {
   price: number;
 }
 
-export interface ICategorie {
+export interface IApp {
   id: string;
   name: string;
   description: string;

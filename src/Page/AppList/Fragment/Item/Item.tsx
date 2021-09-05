@@ -1,5 +1,7 @@
 import React from "react";
-import { ICategorie } from "../../../../Services/Categorie/CategorieInterface";
+import { IApp } from "../../../../Services/App/AppInterface";
+
+import { numberFormat } from "../../../../Utils/Format";
 import {
   AppItem,
   BoxIinfo,
@@ -10,46 +12,41 @@ import {
 } from "./styled";
 
 type Props = {
-  categorie: ICategorie;
+  app: IApp;
 };
 
-export const Item = ({ categorie }: Props) => {
+export const Item = ({ app }: Props) => {
   return (
     <AppItem>
       <BoxIinfo>
         <BoxInfoContent>
           <Description>
-            <h1>{categorie.name}</h1>
-            <p>{categorie.description}</p>
+            <h1>{app.name}</h1>
+            <p>{app.description}</p>
           </Description>
           <TagsBox>
-            {categorie.categories.map((item, index) => (
-              <>
+            {app.categories.map((item, index) => (
+              <React.Fragment key={item}>
                 {index !== 0 && " / "}
                 <span>{item}</span>
-              </>
+              </React.Fragment>
             ))}
           </TagsBox>
         </BoxInfoContent>
         <BoxInfoFooter>
           <ul>
-            {categorie.subscriptions.map((item) => (
-              <li>
+            {app.subscriptions.map((item) => (
+              <li key={item.name}>
                 <span>{item.name}</span>
                 <h3>
                   {item.price === 0 ? (
-                    <>
-                      Free<sup></sup>
-                    </>
+                    <>Free</>
                   ) : (
-                    <>
-                      {item.price}
-                      <sup>€</sup>
-                    </>
+                    <>{numberFormat(item.price)}</>
                   )}
                 </h3>
               </li>
-            ))}            
+            ))}
           </ul>
         </BoxInfoFooter>
       </BoxIinfo>

@@ -1,19 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { usePagination } from "../../Hooks/usePagination";
-import { ICategorie } from "../../Services/Categorie/CategorieInterface";
-import { CategorieService } from "../../Services/Categorie/CategorieService";
+import { IApp } from "../../Services/App/AppInterface";
+import { AppService } from "../../Services/App/AppService";
+import { appListContext } from "./AppListContext";
 import { Item } from "./Fragment/Item/Item";
 
 import { Search } from "./Fragment/Search/Search";
 import { Container } from "./styled";
 
 export const AppList = () => {
-  const handleFetch = useCallback(async () => {
-    const { data } = await CategorieService.getCategorie();
-    return data;
-  }, []);
+  const { selected } = useContext(appListContext);
 
-  const { PageContainer, rows } = usePagination<ICategorie>({
+  const handleFetch = useCallback(async () => {
+    const data = await AppService.getApp(selected);
+    return data;
+  }, [selected]);
+
+  const { PageContainer, rows } = usePagination<IApp>({
     onFetch: handleFetch,
   });
 
@@ -25,7 +28,7 @@ export const AppList = () => {
           {rows.map((item) => {
             return (
               <li key={item.id}>
-                <Item categorie={item} />
+                <Item app={item} />
               </li>
             );
           })}
