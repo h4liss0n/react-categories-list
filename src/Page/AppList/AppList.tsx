@@ -9,12 +9,13 @@ import { Search } from "./Fragment/Search/Search";
 import { Container } from "./styled";
 
 export const AppList = () => {
-  const { selected } = useContext(appListContext);
+  const { selected, searchByApp } = useContext(appListContext);
 
   const handleFetch = useCallback(async () => {
-    const data = await AppService.getApp(selected);
+    const data = await AppService.getApp(selected, searchByApp);
+    console.log(data);
     return data;
-  }, [selected]);
+  }, [selected, searchByApp]);
 
   const { PageContainer, rows } = usePagination<IApp>({
     onFetch: handleFetch,
@@ -25,7 +26,7 @@ export const AppList = () => {
       <Search />
       <PageContainer>
         <ul>
-          {rows.map((item) => {
+          {rows?.map((item) => {
             return (
               <li key={item.id}>
                 <Item app={item} />

@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container } from "./styled";
-import { InputText } from './../../../../Components/InputText/InputText';
+import { InputText } from "./../../../../Components/InputText/InputText";
+import { useDebounce } from "./../../../../Hooks/useDebounce";
+import { appListContext } from "../../AppListContext";
 
 export const Search = () => {
-  return <Container>
-    <InputText type="text" placeholder="Search by App"/>
-  </Container>;
+  const [search, setSearch] = useState("");
+  const { setSearchByApp } = useContext(appListContext);
+
+  const text = useDebounce<string>({
+    value: search,
+    delay: 2000,
+    defaultValue: "",
+  });
+
+  useEffect(() => {
+    setSearchByApp(text);
+    console.log(text);
+  }, [setSearchByApp, text]);
+
+  return (
+    <Container>
+      <InputText
+        type="text"
+        placeholder="Search by App"
+        onTypo={(v) => setSearch(v)}
+      />
+    </Container>
+  );
 };

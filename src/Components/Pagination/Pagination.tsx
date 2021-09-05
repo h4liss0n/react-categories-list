@@ -28,6 +28,8 @@ export const Pagination = ({ pageLength, onSelectPage, activePage }: Props) => {
     setPages(list);
   }, [pageLength]);
 
+  if (pages.length === 0 ) return null
+
   return (
     <List>
       <Item>
