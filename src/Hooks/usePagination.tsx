@@ -48,6 +48,9 @@ export const usePagination = <T extends unknown>({ onFetch }: Props) => {
 
   const handleSelectPage = useCallback(
     (index: number) => {
+      if (index < 0) return;
+      if (index > data.length - 1) return;
+
       handleInitialPage(index, data);
       setActivePage(index);
     },

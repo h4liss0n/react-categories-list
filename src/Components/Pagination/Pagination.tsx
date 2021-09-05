@@ -28,12 +28,12 @@ export const Pagination = ({ pageLength, onSelectPage, activePage }: Props) => {
     setPages(list);
   }, [pageLength]);
 
-  if (pages.length === 0 ) return null
+  if (pages.length === 0) return null;
 
   return (
     <List>
       <Item>
-        <Link onClick={() => onSelectPage(pages[0].index)}>&lt;</Link>
+        <Link onClick={() => onSelectPage(activePage - 1)}>&lt;</Link>
       </Item>
 
       {pages.map((item) => (
@@ -48,9 +48,7 @@ export const Pagination = ({ pageLength, onSelectPage, activePage }: Props) => {
       ))}
 
       <Item>
-        <Link onClick={() => onSelectPage(pages[pages.length - 1].index)}>
-          &gt;
-        </Link>
+        <Link onClick={() => onSelectPage(activePage + 1)}>&gt;</Link>
       </Item>
     </List>
   );

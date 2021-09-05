@@ -24,4 +24,9 @@ export const Link = styled.a<PropsLink>`
   text-decoration: none;
   background: ${(props) =>
     props.active ? props.theme.colors.teal : props.theme.colors.gray};
+
+  &:hover {
+    background: ${(props) => props.theme.colors.teal};
+    color: ${(props) => props.theme.colors.white};
+  }
 `;
