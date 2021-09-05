@@ -13,10 +13,10 @@ export const Item = styled.li`
   margin-right: 0.25rem;
 `;
 export const Link = styled.a`
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: ${(props) => props.theme.colors.grayDark};
   padding: 0.375rem 0.4375rem;
   text-decoration: none;
   background: ${(props) => props.theme.colors.gray};
-  
 `;

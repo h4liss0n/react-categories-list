@@ -1,4 +1,5 @@
 import React from "react";
+import { ICategorie } from "../../../../Services/Categorie/CategorieInterface";
 import {
   AppItem,
   BoxIinfo,
@@ -8,35 +9,47 @@ import {
   TagsBox,
 } from "./styled";
 
-export const Item = () => {
+type Props = {
+  categorie: ICategorie;
+};
+
+export const Item = ({ categorie }: Props) => {
   return (
     <AppItem>
       <BoxIinfo>
         <BoxInfoContent>
           <Description>
-            <h1>Voice Report</h1>
-            <p>Calls reporting and analytics of your calls.</p>
+            <h1>{categorie.name}</h1>
+            <p>{categorie.description}</p>
           </Description>
           <TagsBox>
-            <span>Voice Analytics</span>
-            <span>Reporting</span>
-            <span>Optimization</span>
+            {categorie.categories.map((item, index) => (
+              <>
+                {index !== 0 && " / "}
+                <span>{item}</span>
+              </>
+            ))}
           </TagsBox>
         </BoxInfoContent>
         <BoxInfoFooter>
           <ul>
-            <li>
-              <span>Trial</span>
-              <h3>
-                Free<sup></sup>
-              </h3>
-            </li>
-            <li>
-              <span>Professional</span>
-              <h3>
-                35.00<sup>€</sup>
-              </h3>
-            </li>
+            {categorie.subscriptions.map((item) => (
+              <li>
+                <span>{item.name}</span>
+                <h3>
+                  {item.price === 0 ? (
+                    <>
+                      Free<sup></sup>
+                    </>
+                  ) : (
+                    <>
+                      {item.price}
+                      <sup>€</sup>
+                    </>
+                  )}
+                </h3>
+              </li>
+            ))}            
           </ul>
         </BoxInfoFooter>
       </BoxIinfo>
