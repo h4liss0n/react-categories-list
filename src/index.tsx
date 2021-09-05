@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./styled";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode>    
     <ThemeProvider theme={theme}>
       <GlobalStyle theme={theme} />
       <App />

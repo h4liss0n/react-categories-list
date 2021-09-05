@@ -1,4 +1,5 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
+import { Loading } from "../../Components/Loading/Loading";
 import { usePagination } from "../../Hooks/usePagination";
 import { IApp } from "../../Services/App/AppInterface";
 import { AppService } from "../../Services/App/AppService";
@@ -10,11 +11,16 @@ import { Container } from "./styled";
 
 export const AppList = () => {
   const { selected, searchByApp } = useContext(appListContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFetch = useCallback(async () => {
-    const data = await AppService.getApp(selected, searchByApp);
-    console.log(data);
-    return data;
+    try {
+      setIsLoading(true);
+      const data = await AppService.getApp(selected, searchByApp);
+      return data;
+    } finally {
+      setIsLoading(false);
+    }
   }, [selected, searchByApp]);
 
   const { PageContainer, rows } = usePagination<IApp>({
@@ -23,6 +29,7 @@ export const AppList = () => {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <Search />
       <PageContainer>
         <ul>

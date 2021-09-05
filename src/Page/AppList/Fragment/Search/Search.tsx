@@ -15,8 +15,7 @@ export const Search = () => {
   });
 
   useEffect(() => {
-    setSearchByApp(text);
-    console.log(text);
+    setSearchByApp(text);    
   }, [setSearchByApp, text]);
 
   return (

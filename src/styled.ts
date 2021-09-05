@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     color: ${(props) => props.theme.colors.black};
     text-align: left;
-    background-color: ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.gray};   
   }
 
   * {
